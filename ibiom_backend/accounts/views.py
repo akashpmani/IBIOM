@@ -18,3 +18,11 @@ class UserRegistrationView(APIView):
         return Response({ 'msg':'Registration Successful'}, status=status.HTTP_201_CREATED)
     return Response({ 'msg':'Registration Successful'}, status=status.HTTP_400_BAD_REQUEST)
 
+
+class TestView(APIView):
+    
+    def get(self,request):
+        
+        return Response({ 'msg':'Communication Successful'}, status=status.HTTP_201_CREATED)
+        
+

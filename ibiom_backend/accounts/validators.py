@@ -5,7 +5,10 @@ UserModel = get_user_model()
 from rest_framework import serializers
 
 def custom_validation(data):
-    phone = data['phone']
+    try:
+        phone = data['phone']
+    except:
+        raise serializers.ValidationError({'Invalid credentials': 'Please  Give Proper Credentials'})
     try:
         email = data['email'].strip()
         username = data['username'].strip()
