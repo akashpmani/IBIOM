@@ -4,6 +4,7 @@ from rest_framework import status
 UserModel = get_user_model()
 from rest_framework import serializers
 
+
 def custom_validation(data):
     try:
         phone = data['phone']
@@ -35,6 +36,14 @@ def validate_email(data):
     if not email:
         raise ValidationError('an email is needed')
     return True
+
+def validate_logincred(data):
+    if data:
+        if '@' in data and '.' in data:
+            return data
+        if data.isalnum():
+            return data
+    raise ValidationError('Invalid email/username format')
 
 def validate_username(data):
     username = data['username'].strip()

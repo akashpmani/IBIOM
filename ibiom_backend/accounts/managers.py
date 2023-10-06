@@ -42,10 +42,11 @@ class AccountsManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def authenticate(self, request, email=None, password=None, phone=None, username=None, **kwargs):
+    def authenticate(self, request, login_cred=None, password=None ):
+        print("authernticate")
         UserModel = get_user_model()
         try:
-            user = UserModel.objects.get(Q(email=email) | Q(username=username))
+            user = UserModel.objects.get(Q(email=login_cred) | Q(username=login_cred))
         except UserModel.DoesNotExist:
             print('no user')
             return None
