@@ -28,7 +28,7 @@ class UserRegistrationView(APIView):
         user = serializer.save()
         token = get_tokens_for_user(user)
         return Response({ 'token':token, 'msg':'Registration Successful'}, status=status.HTTP_201_CREATED)
-    return Response({ 'msg':'Registration Successful'}, status=status.HTTP_400_BAD_REQUEST)
+    return Response({ 'msg':'Registration UnSuccessful'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class TestView(APIView):

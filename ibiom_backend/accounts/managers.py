@@ -10,34 +10,32 @@ from django.contrib.auth.hashers import make_password
 
 class AccountsManager(BaseUserManager):
     """
-      Creates and saves a User with the given email, name, phone and password.
+      Creates and saves a User with the given email, name, and password.
 
     """
 
-    def create_user(self, email, username, phone, password=None, **extra_fields):
+    def create_user(self, email, username, password=None, **extra_fields):
         if not email:
             raise ValueError('The Email field must be set')
         if not username:
             raise ValueError('The username field must be set')
-        if not phone:
-            raise ValueError('The phone field must be set')
         email = self.normalize_email(email)
         user = self.model(email=email,
-                          username=username, phone=phone, **extra_fields)
+                          username=username, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, username, phone, password=None, **extra_fields):
+    def create_superuser(self, email, username, password=None, **extra_fields):
         user = self.create_user(email=email,
-                                username=username, phone=phone, password=password)
+                                username=username , password=password)
         user.is_superuser = True
         user.save(using=self._db)
         return user
     
-    def create_staff(self, email, username, phone, password=None, **extra_fields):
+    def create_staff(self, email, username, password=None, **extra_fields):
         user = self.create_user(email=email,
-                                username=username, phone=phone, password=password)
+                                username=username, password=password)
         user.is_staff = True
         user.save(using=self._db)
         return user

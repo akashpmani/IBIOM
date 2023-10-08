@@ -7,7 +7,6 @@ class UserAccounts(AbstractBaseUser):
     ##basic credentials
     username = models.CharField(max_length=30, unique=True)
     email = models.EmailField(max_length=200, unique=True)
-    phone =  models.CharField(max_length=20, unique=True, blank=False)
     ##default fields
     is_verified = models.BooleanField(default=True )
     is_active = models.BooleanField(default=True)
@@ -17,9 +16,8 @@ class UserAccounts(AbstractBaseUser):
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     ##creation options
-    USERNAME_FIELD = 'phone'
-    EMAIL_FIELD = 'email'
-    REQUIRED_FIELDS = ['email', 'username']
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username']
     objects = AccountsManager()   
 
     def __str__(self): 

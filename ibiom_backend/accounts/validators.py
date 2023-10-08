@@ -7,10 +7,6 @@ from rest_framework import serializers
 
 def custom_validation(data):
     try:
-        phone = data['phone']
-    except:
-        raise serializers.ValidationError({'Invalid credentials': 'Please  Give Proper Credentials'})
-    try:
         email = data['email'].strip()
         username = data['username'].strip()
         password = data['password'].strip()
@@ -25,9 +21,6 @@ def custom_validation(data):
     
     if not username or UserModel.objects.filter(username=username).exists():
         raise serializers.ValidationError({'username': 'Choose another username'})
-    
-    if not phone or UserModel.objects.filter(phone=phone).exists():
-        raise serializers.ValidationError({'phone': 'This phone number is already in use'})
     
     return data
     

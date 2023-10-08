@@ -9,7 +9,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
     # We are writing this becoz we need confirm password field in our Registratin Request
     class Meta:
         model = UserAccounts
-        fields=['email', 'username', 'password', 'phone']
+        fields=['email', 'username', 'password']
         extra_kwargs={
         'password':{'write_only':True}
         }
